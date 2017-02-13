@@ -26,7 +26,7 @@ View the Live Project
 
 ## Screenshot
 
-![screenshot](https://raw.githubusercontent.com/ccparkhurst/tweetalyze/master/tweetalyze.png)
+![screenshot](https://raw.githubusercontent.com/ccparkhurst/Tweetalyze/master/tweetalyze.png)
 
 ## Future Development
 
