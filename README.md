@@ -1,4 +1,4 @@
-# Tweetalyzer
+# Tweetalyze
 Data visualization tool which displays real-time sentiment analysis of tweets on a given topic.
 
 Tweetalyze uses a Node.js back-end to tap the Twitter Streaming API, perform sentiment analysis of the user's search query, and feed the resulting data into the AngularJS 1.6 front-end by way of the Highcharts.js charting library.
