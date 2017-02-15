@@ -1,22 +1,6 @@
 app.service('twitterService', function($http, $state, $interval) {
 
 /**
- * Get 100 recent tweets with this search term
- **/
-
-    // Initialize a variable to set results to
-    this.searchResults = [];
-    this.tweetText = [];
-
-    this.getSearchResults = function(searchQuery) {
-      return $http.get('/search/' + searchQuery)
-      .then(results => {
-        this.searchResults = results.data;
-        $state.go('show');
-      });
-    };
-
-/**
  * Stream statuses filtered by keyword
  * number of tweets per second depends on topic popularity
  **/
@@ -51,10 +35,6 @@ app.service('twitterService', function($http, $state, $interval) {
       $http.get('/stream/' + streamQuery).then( (response) => {
         $state.go('stream')
         this.getUpdate();
-        // timer = $interval( () => {
-        //   console.log('we are polling');
-        //   this.getUpdate();
-        // }, 3000);
       });
     };
     // Restart stream from stream view page
@@ -101,20 +81,6 @@ app.service('twitterService', function($http, $state, $interval) {
         console.log('here is our negative percentage', this.negativePercentage);
       });
     };
-
-    this.initialPieChart = () => {
-        // let positiveResults = this.filteredResponse.filter( tweet => tweet.sentiment.score > 0);
-        // this.positiveResults.push.apply(this.positiveResults, positiveResults);
-
-        this.positivePercentage = .50;
-        console.log('here is our positive percentage', this.positivePercentage);
-
-        // let negativeResults = this.filteredResponse.filter( tweet => tweet.sentiment.score < 0);
-        // this.negativeResults.push.apply(this.negativeResults, negativeResults);
-
-        this.negativePercentage = .50;
-        console.log('here is our negative percentage', this.negativePercentage);
-      };
 
     this.stopPolling = () => {
         $http.get('/stream/stop');
