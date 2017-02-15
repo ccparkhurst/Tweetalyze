@@ -1,5 +1,4 @@
-// Requiring some modules we'll be using
-// to gather and analyze the tweets
+// Requiring modules
 const util = require('util');
 const moment = require('moment');
 
@@ -19,25 +18,6 @@ const twitterClient = new twitter({
   access_token_secret: process.env.TWITTER_TOKEN_SECRET
 });
 
-/**
- * Get 100 tweets based on a search input
- **/
-const twitterSearch = function(text, callback) {
-    // Initialize a new twitter client
-  //                API end point  search param
-  twitterClient.get('search/tweets', { q: text, count: 100 }, function(error, tweets, response) {
-  // Returns an array of objects with each tweet as an object
-  // with sentiment analysis scores
-  let results = tweets.statuses.map( status => {
-      return {
-        text: status.text,
-        time: status.created_at,
-        sentiment: analyze(status.text),
-      }
-  })
-    callback(results);
-  })
-};
 
 /**
  * Stream statuses filtered by keyword
@@ -55,10 +35,8 @@ const streamAnalyze = function(text) {
         // Resolve callback to start stream
         that.currentStream = stream;
         that.currentStream.on('data', function(tweet) {
-            // console.log('heres a tweet', tweet.id);
             // Add sentiment analysis to each tweet object
             tweet.sentiment = analyze(tweet.text);
-            //
             that.streamData.push(tweet);
             console.log(tweet.text);
         });
