@@ -10,7 +10,6 @@ app.component('stream', {
       vm.negativePercentage = 50;
       vm.positivePercentage = 50;
 
-
       // Need this to restart stream
       this.query = twitterService.query;
 
@@ -85,6 +84,7 @@ app.component('stream', {
             vm.tweetCount = twitterService.filteredResponse.length;
           }, 500);
       };
+        
       // Starts polling process
       this.$onInit = () => {
           // twitterService.initialPieChart();
