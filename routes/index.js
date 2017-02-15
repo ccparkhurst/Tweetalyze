@@ -4,17 +4,13 @@ const router = express.Router();
 const streamAnalyze = require('../services/twitter.service').streamAnalyze;
 const streamData = require('../services/twitter.service').streamData;
 const killCurrentStream = require('../services/twitter.service').killCurrentStream;
-/* GET home page. */
+
+// GET home page
 router.get('/', function(req, res, next) {
   res.render('index');
 });
 
-router.get('/search/:searchQuery', function(req, res, next) {
-  twitterSearch(req.params.searchQuery, function(data) {
-    res.json(data);
-  });
-});
-
+// Test route
 router.get('/stream/test', function(req, res, next) {
   streamAnalyze('falcons');
   res.sendStatus(200);
@@ -32,6 +28,7 @@ router.get('/stream/update', function(req, res, next) {
   res.json(copyOfStreamData);
 });
 
+// Kill the stream on the server 
 router.get('/stream/stop', function(req, res, next) {
   killCurrentStream();
   res.sendStatus(200);
@@ -41,7 +38,6 @@ router.get('/stream/stop', function(req, res, next) {
 router.get('/stream/:streamQuery', function(req, res, next) {
   streamAnalyze(req.params.streamQuery);
   res.sendStatus(200);
-  // res.json({text:'we searched with' + req.params.searchQuery})
 });
 
 module.exports = router;
