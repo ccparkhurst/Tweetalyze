@@ -25,6 +25,7 @@ const twitterClient = new twitter({
  **/
 
 // Initialize a point of storage for stream
+//that allows access to original value of this
 let that = this;
 that.streamData = [];
 const streamAnalyze = function(text) {
