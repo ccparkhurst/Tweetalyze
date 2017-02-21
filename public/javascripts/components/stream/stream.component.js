@@ -5,6 +5,9 @@ app.component('stream', {
       this.tweetScores = twitterService.tweetScores;
       this.tweetTimes = twitterService.tweetTimes;
       this.filteredResponse = twitterService.filteredResponse;
+      
+      // Bind the variables to the Controller and make them data-bindable to the View
+      // Removes issues of dealing with 'this' scoping
       let vm = this;
       vm.tweetCount = 0;
       vm.negativePercentage = 50;
