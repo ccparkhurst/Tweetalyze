@@ -1,11 +1,11 @@
 app.component('stream', {
     templateUrl: '/javascripts/components/stream/stream.html',
     controller: function(twitterService, $log, $scope, $interval, $timeout, $state) {
-      let vm = this;
       this.tweetText = twitterService.tweetText;
       this.tweetScores = twitterService.tweetScores;
       this.tweetTimes = twitterService.tweetTimes;
       this.filteredResponse = twitterService.filteredResponse;
+      let vm = this;
       vm.tweetCount = 0;
       vm.negativePercentage = 50;
       vm.positivePercentage = 50;
@@ -13,11 +13,7 @@ app.component('stream', {
       // Need this to restart stream
       this.query = twitterService.query;
 
-      this.restartStream = () => {
-        twitterService.restartStream(this.query);
-        this.poll();
-      };
-
+      // Highchart Configuration
       this.chartConfig = {
           options: {
               chart: {
@@ -87,10 +83,16 @@ app.component('stream', {
         
       // Starts polling process
       this.$onInit = () => {
-          // twitterService.initialPieChart();
           this.poll();
       };
+      
+      // Restarts stream
+      this.restartStream = () => {
+        twitterService.restartStream(this.query);
+        this.poll();
+      };
 
+      // Stops polling
       this.stopPoll = () => {
         twitterService.stopPolling();
         $interval.cancel(this.interval);
