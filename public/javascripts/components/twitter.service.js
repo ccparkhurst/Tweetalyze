@@ -59,7 +59,10 @@ app.service('twitterService', function($http, $state, $interval) {
         // Map out y-axis data
         let tweetScores = filteredResponse.map( tweet => tweet.sentiment.score );
         // Push these onto the array because we don't want it to reset each interval
-        this.tweetScores.push.apply(this.tweetScores, tweetScores);
+        let latest = this.tweetScores.concat( tweetScores ).slice( -100 )
+        this.tweetScores.splice(0, this.tweetScores.length)
+        this.tweetScores.push.apply(this.tweetScores,latest)
+        // this.tweetScores.push.apply(this.tweetScores, tweetScores);
         // Map out x-axis data
         let tweetTimes  = filteredResponse.map( tweet => tweet.time );
         this.tweetTimes.push.apply(this.tweetTimes, tweetTimes);
