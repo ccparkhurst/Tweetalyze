@@ -54,7 +54,7 @@ killCurrentStream = function() {
       that.currentStream = null;
     }
 }
-module.exports = { twitterSearch: twitterSearch,
+module.exports = { 
                    streamAnalyze: streamAnalyze,
                    streamData: that.streamData,
                    killCurrentStream: killCurrentStream
